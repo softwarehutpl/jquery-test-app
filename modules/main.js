@@ -1,9 +1,15 @@
 require.config({
   baseUrl: 'modules',
   paths: {
-    jquery: '../vendor/jquery-3.2.1.min'
+    jquery: '../node_modules/jquery/dist/jquery.min'
   }
 });
 require(['jquery', 'components/booksList/booksList'], function($, booksList) {
-  booksList.showBooks();
+  var currentDate = new Date();
+  var loggedUser = JSON.parse(sessionStorage.getItem('loggedUser'));
+  if (loggedUser) {
+    booksList.showBooks();
+  } else {
+    window.location.href = "login.html";
+  }
 });

@@ -1,0 +1,13 @@
+{
+  "name": "test_app",
+  "version": "0.6.4",
+  "description": "Test jQuery app",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "requirejs": "^2.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/softwarehutpl/jquery-test-app.git"
+  }
+}

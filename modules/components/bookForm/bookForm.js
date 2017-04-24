@@ -6,7 +6,7 @@ define(['jquery', 'data/books'], function($, booksData) {
           var $bookForm = $('#book-form');
           $bookForm.find('#book-title').val(book.title);
           $bookForm.find('#book-author').val(book.author);
-          book.isRented ? $bookForm.find('#book-rented').prop('checked', true) : $bookForm.find('#book-rented').prop('checked', false);
+          $bookForm.find('#book-rented').prop('checked', book.isRented);
         }
         $('#submit-book').on('click', function(e) {
           e.preventDefault();

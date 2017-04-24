@@ -8,9 +8,16 @@ define(['jquery', 'components/bookForm/bookForm', 'data/books'], function($, boo
         bookForm.showBookForm();
       });
       $('#content').html($addBookButton);
+      //logaout button
+      var $logoutButton = $('<button>Wyloguj</button>').appendTo('#content');
+      $logoutButton.on('click', function(e) {
+        e.preventDefault();
+        sessionStorage.removeItem('loggedUser');
+        window.location.href = "login.html";
+      });
       //books list
       $('#content').append('<h1>Lista książek</h1>');
-      var $booksList = $('#content').append('<ul id="books"></ul>');
+      var $booksList = $('<ul id="books"></ul>').appendTo('#content');
       var books = booksData.getBooks();
       for (var i = 0; i < books.length; i++) {
         booksList.appendBook(books[i], $booksList);
@@ -21,7 +28,7 @@ define(['jquery', 'components/bookForm/bookForm', 'data/books'], function($, boo
       $bookElement.append('<span>' + book.title + '</span>');
       $bookElement.append('<span>' + book.author + '</span>');
       book.isRented ? $bookElement.append('<span>Wypożyczona</span>') : $bookElement.append('<span>Niewypożyczona</span>');
-      var $editButton = $bookElement.append('<button class="edit-button" type="button">Edytuj książkę</button>');
+      var $editButton = $('<button class="edit-button" type="button">Edytuj książkę</button>').appendTo($bookElement);
       $editButton.on('click', function(e) {
         e.preventDefault();
         bookForm.showBookForm(book);
