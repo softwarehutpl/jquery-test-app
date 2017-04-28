@@ -11,11 +11,11 @@
 <body>
   <form id="login-form">
     <p>Login:</p>
-    <input id="login" type="text" name="login">
+    <input id="login" type="text" name="login" v-model="login">
     <p>Hasło:</p>
-    <input id="password" type="password" name="password">
-    <button id="login-button">Zaloguj</button>
-    <div id="validation-error"></div>
+    <input id="password" type="password" name="password" v-model="password">
+    <button id="login-button" @click="logIn">Zaloguj</button>
+    <div id="validation-error">{{validationError}}</div>
   </form>
 </body>
 

@@ -2,48 +2,45 @@ import booksData from '../../data/books';
 import "./bookForm.scss";
 import $ from 'jquery';
 
-var url = require("./bookForm.html");
-
 var bookForm = {
-  showBookForm: function(book) {
-    $('#content').load(url, function() {
-      if (book) {
-        var $bookForm = $('#book-form');
-        $bookForm.find('#book-title').val(book.title);
-        $bookForm.find('#book-author').val(book.author);
-        $bookForm.find('#book-rented').prop('checked', book.isRented);
-      }
-      $('#submit-book').on('click', function(e) {
-        e.preventDefault();
-        if (book) {
-          bookForm.submitBook(book.id);
-        } else {
-          bookForm.submitBook();
-        }
-      });
-    });
-  },
-  submitBook: function(bookId) {
-    var $bookForm = $('#book-form');
-    var title = $bookForm.find('#book-title').val();
-    var author = $bookForm.find('#book-author').val();
-    var isRented = $bookForm.find('#book-rented').is(':checked');
-    if (title !== '' && author !== '') {
-      var newBookData = {
-        title: title,
-        author: author,
-        isRented: isRented
-      };
-      if (typeof bookId !== 'undefined') {
-        booksData.editBook(bookId, newBookData);
-      } else {
-        booksData.addBook(newBookData);
-      }
-      var booksList = require('../booksList/booksList');
-      booksList.showBooks();
-    } else {
-      $bookForm.find('#validation-error').html('Tytył książki oraz autor wymagany');
+  props: ['bookId'],
+  template: '<form id="book-form" class="book-form">' +
+    '<p>Tytuł:</p>' +
+    '<input id="book-title" class="book-form__input" type="text" name="title" v-model="title">' +
+    '<p>Autor:</p>' +
+    '<input id="book-author" class="book-form__input" type="text" name="author" v-model="author">' +
+    '<br/>' +
+    '<input id="book-rented" class="book-form__checkbox" type="checkbox" name="rented" v-model="isRented">Wypożyczona<br>' +
+    '<div id="validation-error">{{validationError}}</div>' +
+    '<button id="submit-book" class="book-form__button" v-on:click="submitBook">Zapisz</button>' +
+    '</form>',
+  data() {
+    return {
+      title: '',
+      author: '',
+      isRented: false,
+      validationError: ''
     }
   },
-};
+  methods: {
+    submitBook(e) {
+      e.preventDefault();
+      if (this.title !== '' && this.author !== '') {
+        var newBookData = {
+          title: this.title,
+          author: this.author,
+          isRented: this.isRented
+        };
+        if (this.bookId !== null) {
+          booksData.editBook(this.bookId, newBookData);
+        } else {
+          booksData.addBook(newBookData);
+        }
+      } else {
+        this.validationError = 'Tytuł oraz autor są wymagane';
+      }
+    }
+  }
+}
+
 module.exports = bookForm;

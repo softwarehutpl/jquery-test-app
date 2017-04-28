@@ -14,7 +14,8 @@ const config = {
   resolve: {
     extensions: ['*', '.js'],
     alias: {
-      jquery: path.resolve(__dirname, 'node_modules/jquery/dist/jquery'),
+      vue: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm'),
+      jquery: path.resolve(__dirname, 'node_modules/jquery/dist/jquery')
     }
   },
   module: {

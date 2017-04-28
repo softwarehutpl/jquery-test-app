@@ -1,42 +1,31 @@
-import $ from "jquery";
-import bookForm from '../bookForm/bookForm';
+import Vue from "vue";
 import booksData from '../../data/books';
+import bookForm from '../bookForm/bookForm';
 
 var booksList = {
-  showBooks: function() {
-    //add book button
-    var $addBookButton = $('<button type="button">Dodaj książkę</button>');
-    $addBookButton.on('click', function(e) {
+  template: '<div><button type="button"  v-on:click="addBook">Dodaj książkę</button>' +
+    '<button v-on:click="logOut">Wyloguj</button>' +
+    '<h1>Lista książek</h1><li v-for="book in books">{{ book.title }} - {{ book.author }} - <span v-if="book.isRented">Wypożyczona</span><span v-else>Niewypożyczona</span></li>' +
+    '<book-form :bookId="editedBookId"></book-form></div>',
+  data() {
+    return {
+      books: booksData.getBooks(),
+      editedBookId: null
+    }
+  },
+  components: {
+    'bookForm': bookForm,
+  },
+  methods: {
+    addBook(e) {
       e.preventDefault();
-      bookForm.showBookForm();
-    });
-    $('#content').html($addBookButton);
-    //logaout button
-    var $logoutButton = $('<button>Wyloguj</button>').appendTo('#content');
-    $logoutButton.on('click', function(e) {
+      console.log('add book');
+    },
+    logOut(e) {
       e.preventDefault();
       sessionStorage.removeItem('loggedUser');
       window.location.href = "login.html";
-    });
-    //books list
-    $('#content').append('<h1>Lista książek</h1>');
-    var $booksList = $('<ul id="books"></ul>').appendTo('#content');
-    var books = booksData.getBooks();
-    for (var i = 0; i < books.length; i++) {
-      booksList.appendBook(books[i], $booksList);
     }
-  },
-  appendBook: function(book, $container) {
-    var $bookElement = $('<li></li>');
-    $bookElement.append('<span>' + book.title + '</span>');
-    $bookElement.append('<span>' + book.author + '</span>');
-    $bookElement.append(book.isRented ? '<span>Wypożyczona</span>' : '<span>Niewypożyczona</span>');
-    var $editButton = $('<button class="edit-button" type="button">Edytuj książkę</button>').appendTo($bookElement);
-    $editButton.on('click', function(e) {
-      e.preventDefault();
-      bookForm.showBookForm(book);
-    });
-    $container.append($bookElement);
   }
 }
 module.exports = booksList;
