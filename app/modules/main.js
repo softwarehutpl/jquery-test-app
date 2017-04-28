@@ -1,5 +1,5 @@
-var $ = require("jquery");
-var booksList = require('components/booksList/booksList');
+import $ from "jquery";
+import booksList from './components/booksList/booksList';
 
 var currentDate = new Date();
 var loggedUser = JSON.parse(sessionStorage.getItem('loggedUser'));

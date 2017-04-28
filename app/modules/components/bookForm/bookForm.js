@@ -1,5 +1,6 @@
-var $ = require("jquery");
-var booksData = require('data/books');
+import booksData from '../../data/books';
+import "./bookForm.scss";
+import $ from 'jquery';
 
 var url = require("./bookForm.html");
 
@@ -38,7 +39,7 @@ var bookForm = {
       } else {
         booksData.addBook(newBookData);
       }
-      var booksList = require('components/booksList/booksList');
+      var booksList = require('../booksList/booksList');
       booksList.showBooks();
     } else {
       $bookForm.find('#validation-error').html('Tytył książki oraz autor wymagany');

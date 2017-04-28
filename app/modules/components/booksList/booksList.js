@@ -1,6 +1,6 @@
-var $ = require("jquery")
-var bookForm = require('components/bookForm/bookForm');
-var booksData = require('data/books');
+import $ from "jquery";
+import bookForm from '../bookForm/bookForm';
+import booksData from '../../data/books';
 
 var booksList = {
   showBooks: function() {
@@ -30,7 +30,7 @@ var booksList = {
     var $bookElement = $('<li></li>');
     $bookElement.append('<span>' + book.title + '</span>');
     $bookElement.append('<span>' + book.author + '</span>');
-    book.isRented ? $bookElement.append('<span>Wypożyczona</span>') : $bookElement.append('<span>Niewypożyczona</span>');
+    $bookElement.append(book.isRented ? '<span>Wypożyczona</span>' : '<span>Niewypożyczona</span>');
     var $editButton = $('<button class="edit-button" type="button">Edytuj książkę</button>').appendTo($bookElement);
     $editButton.on('click', function(e) {
       e.preventDefault();

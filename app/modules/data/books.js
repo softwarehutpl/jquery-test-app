@@ -1,4 +1,4 @@
-module.exports = {
+var booksData = {
   getBooks: function() {
     var books = JSON.parse(localStorage.getItem("books"));
     if (books === null) {
@@ -22,3 +22,4 @@ module.exports = {
     localStorage.setItem("books", JSON.stringify(books));
   }
 };
+module.exports = booksData;

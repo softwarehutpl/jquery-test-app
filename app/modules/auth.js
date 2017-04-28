@@ -1,7 +1,6 @@
-var $ = require("jquery")
-var userData = require('data/user');
+import $ from "jquery";
+import userData from './data/user';
 
-console.log(userData);
 $('#login-button').on('click', function(e) {
   e.preventDefault();
   var login = $('#login').val();
@@ -15,4 +14,5 @@ $('#login-button').on('click', function(e) {
   } else {
     $('#validation-error').html('Nieprawidłowy login lub hasło');
   }
+
 });
