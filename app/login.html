@@ -14,7 +14,7 @@
     <input id="login" type="text" name="login" v-model="login">
     <p>Hasło:</p>
     <input id="password" type="password" name="password" v-model="password">
-    <button id="login-button" @click="logIn">Zaloguj</button>
+    <button id="login-button" @click.prevent="logIn">Zaloguj</button>
     <div id="validation-error">{{validationError}}</div>
   </form>
 </body>

@@ -11,8 +11,7 @@ const loginFormVue = new Vue({
     }
   },
   methods: {
-    logIn(e) {
-      e.preventDefault();
+    logIn() {
       if (userData.checkLoginData(this.login, this.password)) {
         var loggedUser = {
           username: login

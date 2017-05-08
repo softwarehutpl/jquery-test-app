@@ -12,7 +12,7 @@ var bookForm = {
     '<br/>' +
     '<input id="book-rented" class="book-form__checkbox" type="checkbox" name="rented" v-model="book.isRented">Wypożyczona<br>' +
     '<div id="validation-error">{{validationError}}</div>' +
-    '<button id="submit-book" class="book-form__button" v-on:click="submitBook">Zapisz</button>' +
+    '<button id="submit-book" class="book-form__button" v-on:click.prevent="submitBook">Zapisz</button>' +
     '</form>',
   data() {
     return {
@@ -20,8 +20,7 @@ var bookForm = {
     }
   },
   methods: {
-    submitBook(e) {
-      e.preventDefault();
+    submitBook() {
       if (this.book.title !== '' && this.book.author !== '') {
         var newBookData = {
           title: this.book.title,

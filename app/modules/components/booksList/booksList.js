@@ -3,9 +3,9 @@ import booksData from '../../data/books';
 import bookForm from '../bookForm/bookForm';
 
 var booksList = {
-  template: '<div><button type="button"  v-on:click="addBook">Dodaj książkę</button>' +
-    '<button v-on:click="logOut">Wyloguj</button>' +
-    '<div v-if="!bookFormComponent"><h1>Lista książek</h1><li v-for="book in books">{{ book.title }} - {{ book.author }} - <span v-if="book.isRented">Wypożyczona</span><span v-else>Niewypożyczona</span><button v-on:click="editBook(book)">Edytuj</button></li></div>' +
+  template: '<div><button type="button"  v-on:click.prevent="addBook">Dodaj książkę</button>' +
+    '<button v-on:click.prevent="logOut">Wyloguj</button>' +
+    '<div v-if="!bookFormComponent"><h1>Lista książek</h1><li v-for="book in books">{{ book.title }} - {{ book.author }} - <span v-if="book.isRented">Wypożyczona</span><span v-else>Niewypożyczona</span><button v-on:click.prevent="editBook(book)">Edytuj</button></li></div>' +
     '<div :is="bookFormComponent" :book="editedBook" v-on:submitBook="updateBooks"></div></div>',
   data() {
     return {
@@ -23,8 +23,7 @@ var booksList = {
     'bookForm': bookForm,
   },
   methods: {
-    addBook(e) {
-      e.preventDefault();
+    addBook() {
       this.editedBook = {
         bookId: null,
         title: '',
@@ -33,8 +32,7 @@ var booksList = {
       };
       this.bookFormComponent = bookForm;
     },
-    logOut(e) {
-      e.preventDefault();
+    logOut() {
       sessionStorage.removeItem('loggedUser');
       window.location.href = "login.html";
     },
