@@ -5,12 +5,18 @@ import bookForm from '../bookForm/bookForm';
 var booksList = {
   template: '<div><button type="button"  v-on:click="addBook">Dodaj książkę</button>' +
     '<button v-on:click="logOut">Wyloguj</button>' +
-    '<h1>Lista książek</h1><li v-for="book in books">{{ book.title }} - {{ book.author }} - <span v-if="book.isRented">Wypożyczona</span><span v-else>Niewypożyczona</span></li>' +
-    '<book-form :bookId="editedBookId"></book-form></div>',
+    '<div v-if="!bookFormComponent"><h1>Lista książek</h1><li v-for="book in books">{{ book.title }} - {{ book.author }} - <span v-if="book.isRented">Wypożyczona</span><span v-else>Niewypożyczona</span><button v-on:click="editBook(book)">Edytuj</button></li></div>' +
+    '<div :is="bookFormComponent" :book="editedBook" v-on:submitBook="updateBooks"></div></div>',
   data() {
     return {
       books: booksData.getBooks(),
-      editedBookId: null
+      editedBook: {
+        bookId: null,
+        title: '',
+        author: '',
+        isRented: false,
+      },
+      bookFormComponent: ''
     }
   },
   components: {
@@ -19,12 +25,26 @@ var booksList = {
   methods: {
     addBook(e) {
       e.preventDefault();
-      console.log('add book');
+      this.editedBook = {
+        bookId: null,
+        title: '',
+        author: '',
+        isRented: false,
+      };
+      this.bookFormComponent = bookForm;
     },
     logOut(e) {
       e.preventDefault();
       sessionStorage.removeItem('loggedUser');
       window.location.href = "login.html";
+    },
+    editBook(book) {
+      this.editedBook = book;
+      this.bookFormComponent = bookForm;
+    },
+    updateBooks() {
+      this.bookFormComponent = null;
+      this.books = booksData.getBooks();
     }
   }
 }
