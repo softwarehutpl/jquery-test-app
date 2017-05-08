@@ -15,7 +15,7 @@
 import "./bookForm.scss";
 
 export default {
-  props: ['editedBook', 'test'],
+  props: ['editedBook'],
   data() {
     return {
       book: this.editedBook,

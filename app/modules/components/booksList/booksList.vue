@@ -1,13 +1,13 @@
 <template>
 <div><button type="button" v-on:click.prevent="showBookForm()">Dodaj książkę</button>
   <button v-on:click.prevent="logOut">Wyloguj</button>
-  <div v-if="!bookFormComponent">
+  <div v-if="!showForm">
     <h1>Lista książek</h1>
     <ul>
       <li v-for="book in books">{{ book.title }} - {{ book.author }} - <span v-if="book.isRented">Wypożyczona</span><span v-else>Niewypożyczona</span><button v-on:click.prevent="showBookForm(book)">Edytuj</button></li>
     </ul>
   </div>
-  <div :is="bookFormComponent" :editedBook="editedBook" v-on:submitBook="addBook"></div>
+  <bookForm v-if="showForm" :editedBook="editedBook" v-on:submitBook="addBook"></bookForm>
 </div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
         author: '',
         isRented: false,
       },
-      bookFormComponent: ''
+      showForm: false,
     }
   },
   components: {
@@ -43,7 +43,7 @@ export default {
           isRented: false,
         };
       }
-      this.bookFormComponent = bookForm;
+      this.showForm = true;
     },
     logOut() {
       sessionStorage.removeItem('loggedUser');
@@ -51,7 +51,7 @@ export default {
     },
     addBook(book) {
       booksData.saveBook(book);
-      this.bookFormComponent = null;
+      this.showForm = false;
       this.books = booksData.getBooks();
     }
   }
