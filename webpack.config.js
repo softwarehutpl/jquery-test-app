@@ -45,6 +45,10 @@ const config = {
         test: /\.html$/,
         use: 'file-loader?name=[name].[ext]',
         include: [/modules/]
+      },
+      {
+        test: /\.vue$/,
+        loader: "vue-loader"
       }
     ]
   },

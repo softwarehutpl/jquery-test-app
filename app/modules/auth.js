@@ -14,13 +14,11 @@ const loginFormVue = new Vue({
     logIn() {
       if (userData.checkLoginData(this.login, this.password)) {
         var loggedUser = {
-          username: login
+          username: this.login
         };
         sessionStorage.setItem('loggedUser', JSON.stringify(loggedUser));
-        console.log('succes');
         window.location.href = "index.html";
       } else {
-        console.log('error');
         this.validationError = 'Nieprawidłowy login lub hasło';
       }
     }

@@ -1,5 +1,5 @@
 import Vue from "vue";
-import booksList from './components/booksList/booksList';
+import booksList from './components/booksList/booksList.vue';
 
 var mainVue = new Vue({
   el: '#content',

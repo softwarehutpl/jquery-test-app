@@ -7,18 +7,12 @@ var booksData = {
     }
     return books;
   },
-  addBook: function(book) {
+  saveBook(book) {
     var books = booksData.getBooks();
-    book.bookId = books.length;
-    books[books.length] = book;
-    localStorage.setItem("books", JSON.stringify(books));
-  },
-  editBook: function(bookId, newBookData) {
-    var books = booksData.getBooks();
-    if (books[bookId]) {
-      newBookData.bookId = bookId;
-      books[bookId] = newBookData;
+    if (book.bookId === null || book.bookId === undefined) {
+      book.bookId = books.length;
     }
+    books[book.bookId] = book;
     localStorage.setItem("books", JSON.stringify(books));
   }
 };
