@@ -15,7 +15,7 @@ const config = {
     extensions: ['*', '.js'],
     alias: {
       vue: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm'),
-      jquery: path.resolve(__dirname, 'node_modules/jquery/dist/jquery')
+      vuex: path.resolve(__dirname, 'node_modules/vuex/dist/vuex.esm'),
     }
   },
   module: {
@@ -25,7 +25,7 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['es2015'],
+            presets: ['es2015', 'stage-0'],
           }
         }
 

@@ -15,20 +15,24 @@
 import "./bookForm.scss";
 
 export default {
-  props: ['editedBook'],
   data() {
     return {
-      book: this.editedBook,
+      book: {},
       validationError: ''
     }
   },
   methods: {
     submitBook() {
-      if (this.book.title !== '' && this.book.author !== '') {
-        this.$emit('submitBook', this.book);
+      if (this.book.title && this.book.author) {
+        this.$store.dispatch('saveBook', this.book);
       } else {
         this.validationError = 'Tytuł oraz autor są wymagane';
       }
+    }
+  },
+  watch: {
+    '$store.getters.editedBook' (value) {
+      this.book = Object.assign({}, value);
     }
   }
 }
