@@ -17,7 +17,7 @@ const loginFormVue = new Vue({
           username: this.login
         };
         sessionStorage.setItem('loggedUser', JSON.stringify(loggedUser));
-        window.location.href = "index.html";
+        window.location.href = "/#books";
       } else {
         this.validationError = 'Nieprawidłowy login lub hasło';
       }
