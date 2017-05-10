@@ -29,6 +29,7 @@ export default {
           isRented: false,
         });
       }
+      this.$store.dispatch('editShowBookForm', true);
     }
   },
   computed: {

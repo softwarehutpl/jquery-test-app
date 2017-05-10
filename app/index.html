@@ -10,8 +10,8 @@
 
 <body>
   <div id="content">
-    <books-list v-if="loggedUser"></books-list>
-    <book-form v-if="loggedUser"></book-form>
+    <books-list v-if="loggedUser&&!showForm"></books-list>
+    <book-form v-show="loggedUser&&showForm"></book-form>
   </div>
 </body>
 

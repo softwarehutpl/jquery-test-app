@@ -21,6 +21,9 @@ var mainVue = new Vue({
   computed: {
     loggedUser() {
       return JSON.parse(sessionStorage.getItem('loggedUser'));
+    },
+    showForm() {
+      return this.$store.getters.showForm;
     }
   },
   mounted() {
