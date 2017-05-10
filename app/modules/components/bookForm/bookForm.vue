@@ -25,6 +25,7 @@ export default {
     submitBook() {
       if (this.book.title && this.book.author) {
         this.$store.dispatch('saveBook', this.book);
+        this.$router.push('/books');
       } else {
         this.validationError = 'Tytuł oraz autor są wymagane';
       }
