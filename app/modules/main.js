@@ -1,4 +1,6 @@
 import Vue from "vue";
+import "bootstrap";
+import "bootstrap/scss/bootstrap.scss";
 import store from './store';
 import router from './router';
 

@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -15,7 +17,7 @@ const config = {
     extensions: ['*', '.js'],
     alias: {
       vue: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm'),
-      vuex: path.resolve(__dirname, 'node_modules/vuex/dist/vuex.esm'),
+      vuex: path.resolve(__dirname, 'node_modules/vuex/dist/vuex.esm')
     }
   },
   module: {
@@ -61,6 +63,12 @@ const config = {
       filename: 'login.html',
       template: 'app/login.html',
       chunks: ['login']
+    }),
+    new webpack.ProvidePlugin({ // inject ES5 modules as global vars
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      Tether: 'tether'
     })
   ],
   devServer: {

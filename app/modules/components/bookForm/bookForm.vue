@@ -1,13 +1,20 @@
 <template>
-<form class="book-form">
-  <p>Tytuł:</p>
-  <input class="book-form__input" type="text" v-model="book.title">
-  <p>Autor:</p>
-  <input class="book-form__input" type="text" v-model="book.author">
-  <br/>
+<form class="book-form col-12">
+  <div v-if="validationError" class="alert alert-danger">{{validationError}}</div>
+  <div class="form-group row">
+    <label class="col-sm-2 form-control-label">Tytuł</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" v-model="book.title">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 form-control-label">Autor</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" v-model="book.author">
+    </div>
+  </div>
   <input class="book-form__checkbox" type="checkbox" v-model="book.isRented">Wypożyczona<br>
-  <div v-if="validationError">{{validationError}}</div>
-  <button class="book-form__button" v-on:click.prevent="submitBook">Zapisz</button>
+  <button class="book-form__button btn btn-primary float-right" v-on:click.prevent="submitBook">Zapisz</button>
 </form>
 </template>
 

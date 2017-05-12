@@ -14,7 +14,18 @@ function requireAuth(to, from, next) {
   }
 }
 
+function redirectBooks(to, from, next) {
+  console.log('a');
+  next({
+    path: '/books',
+  })
+}
+
 const routes = [{
+    path: '/',
+    beforeEnter: redirectBooks
+  },
+  {
     path: '/books',
     component: booksList,
     beforeEnter: requireAuth
