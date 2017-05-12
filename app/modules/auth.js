@@ -13,21 +13,18 @@ const loginFormVue = new Vue({
   methods: {
     logIn() {
       var data = this;
-      var promise = new Promise(function(resolve, reject) {
-        if (userData.checkLoginData(data.login, data.password)) {
+      userData.checkLoginData(data.login, data.password).then(function(result) {
+        if (result) {
           var loggedUser = {
             username: data.login
           };
           sessionStorage.setItem('loggedUser', JSON.stringify(loggedUser));
-          resolve("Success");
+          window.location.href = "/#books";
         } else {
-          reject(Error("Invalid login or password"));
+          data.validationError = 'Nieprawidłowy login lub hasło';
         }
-      });
-      promise.then(function(result) {
-        window.location.href = "/#books";
       }, function(err) {
-        data.validationError = 'Nieprawidłowy login lub hasło';
+        data.validationError = 'Wystąpił błąd podczas logowania. Spróbuj ponownie później';
       });
     }
   }

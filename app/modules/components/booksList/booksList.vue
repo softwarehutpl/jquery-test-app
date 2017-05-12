@@ -26,6 +26,9 @@ export default {
     books() {
       return this.$store.getters.books
     }
+  },
+  mounted() {
+    this.$store.commit('FETCH_BOOKS');
   }
 }
 </script>

@@ -5,6 +5,8 @@ var loginData = {
 
 module.exports = {
   checkLoginData: function(login, password) {
-    return (login === loginData.login && password === loginData.password);
+    return new Promise(function(resolve, reject) {
+      resolve(login === loginData.login && password === loginData.password);
+    });
   }
 }
