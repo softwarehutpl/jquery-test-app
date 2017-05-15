@@ -1,5 +1,8 @@
 import userData from './data/user';
 import Vue from "vue";
+import "bootstrap";
+import "bootstrap/scss/bootstrap.scss";
+import "./login.scss";
 
 const loginFormVue = new Vue({
   el: '#login-form',

@@ -13,7 +13,10 @@
       <input class="form-control" type="text" v-model="book.author">
     </div>
   </div>
-  <input class="book-form__checkbox" type="checkbox" v-model="book.isRented">Wypożyczona<br>
+  <label class="form-check-label">
+    <input class="form-check-input" type="checkbox" v-model="book.isRented">
+    Wypożyczona
+  </label>
   <button class="book-form__button btn btn-primary float-right" v-on:click.prevent="submitBook">Zapisz</button>
 </form>
 </template>

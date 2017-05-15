@@ -9,14 +9,24 @@
 </head>
 
 <body>
-  <form id="login-form">
-    <p>Login:</p>
-    <input type="text" v-model="login">
-    <p>Hasło:</p>
-    <input type="password" v-model="password">
-    <button @click.prevent="logIn">Zaloguj</button>
-    <div v-if="validationError">{{validationError}}</div>
-  </form>
+  <div class="container">
+    <form id="login-form" class="login-form col-sm-8 push-2">
+      <div class="alert alert-danger" v-if="validationError">{{validationError}}</div>
+      <div class="form-group row">
+        <label class="col-sm-1 form-control-label">Login</label>
+        <div class="col-sm-11">
+          <input class="form-control" type="text" v-model="login">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-1 form-control-label">Hasło</label>
+        <div class="col-sm-11">
+          <input class="form-control" type="password" v-model="password">
+        </div>
+      </div>
+      <button class="btn btn-success btn-block" @click.prevent="logIn">Zaloguj</button>
+    </form>
+  </div>
 </body>
 
 </html>
